@@ -7,6 +7,11 @@ This is just a simple utility object that I use in my work from time to time. I 
 ##jsUtil object
 
 ####local
+
+| property | description |
+| --- | --- | --- |
+| loc | the Storage object to be used. Defaults to localStorage |
+
 | method | arguments | description |
 | --- | --- | --- |
 | set | *string* name, *multiple* val| converts value to JSON and utilizes Storage.setItem to save the value locally  |
