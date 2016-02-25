@@ -6,11 +6,11 @@ This is just a simple utility object that I use in my work from time to time. I 
 # Documentation
 ##jsUtil object
 
-####local
+####store
 
 | property |type| description |
 | --- | --- | --- |
-| loc |Storage object| the Storage object to be used. Defaults to localStorage |
+| storage |Storage object| the Storage object to be used. Defaults to localStorage |
 
 | method | arguments | description |
 | --- | --- | --- |
