@@ -1,4 +1,4 @@
-# jsutil
+# jsUtil
 
 This is just a simple utility object that I use in my work from time to time. I may add things or remove them, but it's never really a finished project. 
 
