@@ -8,9 +8,9 @@ This is just a simple utility object that I use in my work from time to time. I 
 
 ####local
 
-| property | description |
+| property |type| description |
 | --- | --- | --- |
-| loc | the Storage object to be used. Defaults to localStorage |
+| loc |Storage object| the Storage object to be used. Defaults to localStorage |
 
 | method | arguments | description |
 | --- | --- | --- |
