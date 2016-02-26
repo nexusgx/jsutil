@@ -16,5 +16,12 @@ This is just a simple utility object that I use in my work from time to time. I 
 | --- | --- | --- |
 | set | *string* name, *multiple* val| converts value to JSON and utilizes Storage.setItem to save the value locally  |
 | get | *string* name | retrieves the value using Storage.getItem and parses the JSON |
-| delete | *string* name | deletes the item from the Storage object completely|
-| exists | *string* name | detects if the property already exists within the Storage object|
+| delete | *string* name | deletes the item from the Storage object completely |
+| exists | *string* name | detects if the property already exists within the Storage object |
+| purge |  | deletes all variables from the storage object that had been set by jsUtil |
+
+####objects
+
+| method | arguments | description |
+| --- | --- | --- |
+| get_properties | *object* obj| runs through the object and finds all it's properties |
