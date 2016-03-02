@@ -77,5 +77,50 @@ var jsUtil={
             }
             return keys;
         }
+    },
+    
+    //handle arrays
+    arrays:{
+        
+        //is a value in an array
+        in:function(needle,haystack){
+            for (key in haystack) {
+                if (haystack[key] == needle) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    },
+    
+    //handle loading files
+    load:{
+        
+        //array of loaded files
+        loaded:[],
+        
+        //load a script and store it in jsUtil.load.loaded
+        scripts:function(url){
+            if(!jsUtil.arrays.in(url,this.loaded)){
+                var script= document.createElement("script");
+                script.type = "text/javascript";
+                script.src = url;
+                document.getElementsByTagName('head')[0].appendChild(script);
+            }
+        },
+        
+        //load a stylesheet and store it in jsUtil.load.loaded
+        styles:function(url,media){
+            if(!jsUtil.arrays.in(url,this.loaded)){
+                var style= document.createElement("link");
+                style.rel = "stylesheet";
+                if(media)
+                    style.media=media;
+                else
+                    style.media='screen';
+                style.href = url;
+                document.getElementsByTagName('head')[0].appendChild(style);
+            }
+        }
     }
 }
