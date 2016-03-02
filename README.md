@@ -25,3 +25,20 @@ This is just a simple utility object that I use in my work from time to time. I 
 | method | arguments | description |
 | --- | --- | --- |
 | get_properties | *object* obj| runs through the object and finds all it's properties |
+
+####arrays
+
+| method | arguments | description |
+| --- | --- | --- |
+| in | *multiple* needle, *array* haystack | determines if the value exists in the array |
+
+####load
+
+| property |type| description |
+| --- | --- | --- |
+| loaded | array | array of all loaded file urls |
+
+| method | arguments | description |
+| --- | --- | --- |
+| scripts | *string* url| loads the script tag in the header and points it to the url  |
+| styles | *string* name, *string* media | loads the link tag in the header and points it to the url. media defaults to stylesheet |
