@@ -164,3 +164,20 @@ var jsUtil={
         }
     }
 }
+
+
+// load existing stylesheets and scripts into the jsUtil.load cache to allow unload to work
+// set on a timeout to allow for page loading
+setTimer(function(){
+	var loaded_urls_ar=document.getElementsByTagName('script');
+	for(var i=0;i<loaded_urls_ar.length;i++){ //load scripts
+		if(loaded_urls_ar[i].src!=='')
+			jsUtil.load.loaded.push(loaded_urls_ar[i].src);
+	}
+	loaded_urls_ar=document.getElementsByTagName('link');
+	for(var i=0;i<loaded_urls_ar.length;i++){ //load stylesheets
+		if(loaded_urls_ar[i].rel==='stylesheet' && loaded_urls_ar[i].href!==''){
+			jsUtil.load.loaded.push(loaded_urls_ar[i].href);
+		}
+	}
+},300);
