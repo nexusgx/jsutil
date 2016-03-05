@@ -86,6 +86,19 @@ var jsUtil={
             }
             return keys;
         }
+		
+	//merge two objects into one new object
+	merge:function(obj1,obj2){
+		var final_obj = {};
+		for(var prop in obj1){
+			final_obj[prop] = obj1[prop];
+		}
+		for (var prop in obj2){
+			if(!final_obj.hasOwnProperty(prop)) //ignore property if it already exists
+				final_obj[prop] = obj2[prop];
+		}
+		return final_obj;
+	}
     },
     
     //handle arrays
@@ -177,7 +190,7 @@ var jsUtil={
 
 // load existing stylesheets and scripts into the jsUtil.load cache to allow unload to work
 // set on a timeout to allow for page loading
-setTimer(function(){
+setTimeout(function(){
 	var loaded_urls_ar=document.getElementsByTagName('script');
 	for(var i=0;i<loaded_urls_ar.length;i++){ //load scripts
 		if(loaded_urls_ar[i].src!=='')
