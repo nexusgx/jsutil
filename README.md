@@ -25,6 +25,7 @@ This is just a simple utility object that I use in my work from time to time. I 
 | method | arguments | description |
 | --- | --- | --- |
 | get_properties | *object* obj| runs through the object and finds all it's properties |
+| merge | *object obj1*, *object* obj2 | merges two objects into one new object. Properties of the second object will not be merged if the first object shares the same property name. The first object takes precedence.|
 
 ####arrays
 
