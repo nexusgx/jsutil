@@ -1,3 +1,12 @@
+/*!
+ * jsUtil v0.1.3
+ * https://www.tiny-threads.com
+ * 2016-03-04
+ *
+ * Copyright 2016 Steve Koehler
+ * Email : steve@tiny-threads.com
+ */
+
 if(!jsUtil)
 var jsUtil={
     //specific to Storage objects
