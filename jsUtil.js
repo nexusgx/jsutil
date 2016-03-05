@@ -96,10 +96,10 @@ var jsUtil={
     //handle loading files
     load:{
         
-        //array of loaded files
+        //cache of loaded urls
         loaded:[],
         
-        //load a script and store it in jsUtil.load.loaded
+        //load a script and store it in the cache
         scripts:function(url){
             if(!jsUtil.arrays.in(url,this.loaded)){
                 var script= document.createElement("script");
@@ -109,7 +109,7 @@ var jsUtil={
             }
         },
         
-        //load a stylesheet and store it in jsUtil.load.loaded
+        //load a stylesheet and store it in the cache
         styles:function(url,media){
             if(!jsUtil.arrays.in(url,this.loaded)){
                 var style= document.createElement("link");
@@ -120,6 +120,46 @@ var jsUtil={
                     style.media='screen';
                 style.href = url;
                 document.getElementsByTagName('head')[0].appendChild(style);
+            }
+        }
+    },
+    
+    unload:{
+        //remove the script tag with the url and remove from the cache
+        scripts:function(url){
+            var scripts_ar=document.getElementsByTagName('script');
+            
+            //remove actual script tag from DOM
+            for(var i=0;i<scripts_ar.length;i++){
+                if(scripts_ar[i].src===url){
+                    scripts_ar[i].parentNode.removeChild(scripts_ar[i]);
+                }
+            }
+            
+            //remove url instance from the cache
+            for(var i=0;i<jsUtil.load.loaded.length;i++){
+                if(jsUtil.load.loaded[i].src===url){
+                    jsUtil.load.loaded.splice(i,1);
+                }
+            }
+        },
+        
+        //remove a linked stylesheet and remove from cache
+        styles:function(url,media){
+            var links=document.getElementsByTagName('link');
+            
+            //remove actual stylesheet from DOM
+            for(var i=0;i<links.length;i++){
+                if(links[i].href===url){
+                    links[i].parentNode.removeChild(links[i]);
+                }
+            }
+            
+            //remove url instance from the cache
+            for(var i=0;i<jsUtil.load.loaded.length;i++){
+                if(jsUtil.load.loaded[i].src===url){
+                    jsUtil.load.loaded.splice(i,1);
+                }
             }
         }
     }
