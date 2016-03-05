@@ -41,4 +41,11 @@ This is just a simple utility object that I use in my work from time to time. I 
 | method | arguments | description |
 | --- | --- | --- |
 | scripts | *string* url| loads the script tag in the header and points it to the url  |
-| styles | *string* name, *string* media | loads the link tag in the header and points it to the url. media defaults to stylesheet |
+| styles | *string* url, *string* media | loads the link tag in the header and points it to the url. media defaults to stylesheet |
+
+####unload
+
+| method | arguments | description |
+| --- | --- | --- |
+| scripts | *string* url| unloads the script tag with the matching url  |
+| styles | *string* url | unloads the link tag with the matching url |
