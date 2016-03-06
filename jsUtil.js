@@ -98,6 +98,67 @@ var jsUtil={
 				final_obj[prop] = obj2[prop];
 		}
 		return final_obj;
+	},
+	
+	//copied directly from https://davidwalsh.name/javascript-clone
+	clone:function (obj,type){
+		if(typeof type ==='undefined')
+			type='shallow';
+		if(type==='deep'){
+			function mixin(dest, source, copyFunc) {
+				var name, s, i, empty = {};
+				for(name in source){
+					// the (!(name in empty) || empty[name] !== s) condition avoids copying properties in "source"
+					// inherited from Object.prototype.	 For example, if dest has a custom toString() method,
+					// don't overwrite it with the toString() method that source inherited from Object.prototype
+					s = source[name];
+					if(!(name in dest) || (dest[name] !== s && (!(name in empty) || empty[name] !== s))){
+						dest[name] = copyFunc ? copyFunc(s) : s;
+					}
+				}
+				return dest;
+			}
+
+			if(!obj || typeof obj != "object" || Object.prototype.toString.call(obj) === "[object Function]"){
+				// null, undefined, any non-object, or function
+				return obj;	// anything
+			}
+			if(obj.nodeType && "cloneNode" in obj){
+				// DOM Node
+				return obj.cloneNode(true); // Node
+			}
+			if(obj instanceof Date){
+				// Date
+				return new Date(obj.getTime());	// Date
+			}
+			if(obj instanceof RegExp){
+				// RegExp
+				return new RegExp(obj);   // RegExp
+			}
+			var r, i, l;
+			if(obj instanceof Array){
+				// array
+				r = [];
+				for(i = 0, l = obj.length; i < l; ++i){
+					if(i in obj){
+						r.push(jsUtil.objects.clone(obj[i]));
+					}
+				}
+				// we don't clone functions for performance reasons
+				//		}else if(d.isFunction(obj)){
+				//			// function
+				//			r = function(){ return obj.apply(this, arguments); };
+			}
+			else{
+				// generic objects
+				r = obj.constructor ? new obj.constructor() : {};
+			}
+			return mixin(r, obj, clone);
+		}
+		else if(type==='shallow'){
+			return JSON.parse(JSON.stringify(obj));
+		}
+
 	}
     },
     
