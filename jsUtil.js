@@ -100,7 +100,7 @@ var jsUtil={
 		return final_obj;
 	},
 	
-	//copied directly from https://davidwalsh.name/javascript-clone
+	//copied almost directly from https://davidwalsh.name/javascript-clone
 	clone:function (obj,type){
 		if(typeof type ==='undefined')
 			type='shallow';
