@@ -9,6 +9,60 @@
 
 if(!jsUtil)
 var jsUtil={
+    bool:{
+        //toggle between two values; defaults to true and false;
+        toggle: function(value,opt1,opt2){
+            
+            //both opt1 and opt2 must be defined to use custom values
+            if(typeof opt1!='undefined' && typeof opt2!='undefined'){
+                if(value===opt1) 
+                    return opt2;
+                else 
+                    return opt1;
+            }
+            else{
+                if(value)
+                    return false;
+                else
+                    return true;
+            }
+            
+        }
+    },
+    number:{
+        // ensures a number is %, px, or em
+        get_measurement:function(val){
+            if(typeof val=='number')
+                return val.toString()+'%';
+            else
+                return parseFloat(val)+(val.match(/(%|px|em)$/)||["%"])[0];
+        },
+        //get the percentage 
+        get_percent: function(num,total){
+            return (100*(parseInt(num)/parseFloat(total))).toFixed(2);
+        },
+        //get number from a measurement
+        get_number: function(num){
+            var type='';
+            
+            //if it's already a number
+            if(typeof val=='number') return num;
+            
+            type=(val.match(/(%|px|em)$/)||["%"]);
+            return parseFloat(num.replace(type,''));
+        },
+        //pad a number string with a specified character (defaults to 0)
+        pad: function(str,pad,pad_char){
+            if (typeof str === 'undefined') 
+                return pad;
+            if(typeof pad_char==='undefined')
+                pad_char='0';
+            for(var i=0;i<pad;i++)
+                str=pad_char+''+str;
+            return str.slice(-pad);
+        }
+    },
+    
     //specific to Storage objects
     store:{
         storage:localStorage,
@@ -158,7 +212,6 @@ var jsUtil={
 			else if(type==='shallow'){
 				return JSON.parse(JSON.stringify(obj));
 			}
-
 		}
     },
     
@@ -168,7 +221,7 @@ var jsUtil={
         //is a value in an array
         in:function(needle,haystack){
             for (key in haystack) {
-                if (haystack[key] == needle) {
+                if (haystack[key] === needle) {
                     return true;
                 }
             }
@@ -183,17 +236,19 @@ var jsUtil={
         loaded:[],
         
         //load a script and store it in the cache
-        scripts:function(url){
+        scripts:function(url,after){
             if(!jsUtil.arrays.in(url,this.loaded)){
                 var script= document.createElement("script");
                 script.type = "text/javascript";
-                script.src = url;
                 document.getElementsByTagName('head')[0].appendChild(script);
+                if(typeof after=='function')
+                    script.onload=after;
+                script.src = url;
             }
         },
         
         //load a stylesheet and store it in the cache
-        styles:function(url,media){
+        styles:function(url,media,after){
             if(!jsUtil.arrays.in(url,this.loaded)){
                 var style= document.createElement("link");
                 style.rel = "stylesheet";
@@ -201,8 +256,10 @@ var jsUtil={
                     style.media=media;
                 else
                     style.media='screen';
-                style.href = url;
                 document.getElementsByTagName('head')[0].appendChild(style);
+                if(typeof after=='function')
+                    script.onload=after;
+                style.href = url;
             }
         }
     },
