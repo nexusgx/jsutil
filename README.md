@@ -6,6 +6,19 @@ This is just a simple utility object that I use in my work from time to time. I 
 # Documentation
 ##jsUtil object
 
+###number
+| method | arguments | description |
+| --- | --- | --- |
+| get_measurement | *mixed* val| Forces val to have a measurement of either %, px, or em. Defaults to % if no matching measurement is present |
+| get_percent | *mixed* num, *mixed* total | returns the percentage to the nearest hunderedth |
+| get_number | *string* name | gets the number from a measurement of %, em, or px |
+| pad | *string* str, *string* pad, *string* pad_char | pads a string up to character number pad with pad_char. pad_char defaults to 0 |
+
+###bool
+| method | arguments | description |
+| --- | --- | --- |
+| toggle | *mixed* val, *mixed* opt1, *mixed* opt2| toggles val between either true and false, or two custom values (opt1 and opt2). Both opt1 and opt2 must be defined in order to use the custom values |
+
 ####store
 
 | property |type| description |
@@ -14,7 +27,7 @@ This is just a simple utility object that I use in my work from time to time. I 
 
 | method | arguments | description |
 | --- | --- | --- |
-| set | *string* name, *multiple* val| converts value to JSON and utilizes Storage.setItem to save the value locally  |
+| set | *string* name, *mixed* val| converts value to JSON and utilizes Storage.setItem to save the value locally  |
 | get | *string* name | retrieves the value using Storage.getItem and parses the JSON |
 | delete | *string* name | deletes the item from the Storage object completely |
 | exists | *string* name | detects if the property already exists within the Storage object |
@@ -25,14 +38,14 @@ This is just a simple utility object that I use in my work from time to time. I 
 | method | arguments | description |
 | --- | --- | --- |
 | get_properties | *object* obj| runs through the object and finds all it's properties |
-| merge | *object obj1*, *object* obj2 | merges two objects into one new object. Properties of the second object will not be merged if the first object shares the same property name. The first object takes precedence.|
+| merge | *object* obj1, *object* obj2 | merges two objects into one new object. Properties of the second object will not be merged if the first object shares the same property name. The first object takes precedence.|
 | clone| *object* obj, *string* type | clone the source object. set type to deep for a deep copy. type defaults to 'shallow' |
 
 ####arrays
 
 | method | arguments | description |
 | --- | --- | --- |
-| in | *multiple* needle, *array* haystack | determines if the value exists in the array |
+| in | *mixed* needle, *array* haystack | determines if the value exists in the array |
 
 ####load
 
