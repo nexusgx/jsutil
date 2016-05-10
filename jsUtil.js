@@ -1,7 +1,7 @@
 /*!
- * jsUtil v0.1.3
+ * jsUtil v0.1.4
  * https://www.tiny-threads.com
- * 2016-03-04
+ * 2016-05-10
  *
  * Copyright 2016 Steve Koehler
  * Email : steve@tiny-threads.com
@@ -301,6 +301,25 @@ var jsUtil={
                     jsUtil.load.loaded.splice(i,1);
                 }
             }
+        }
+    },
+    elements:{
+        //removing by id
+        remove_by_id:function(id){
+            var ele = document.getElementById(id);
+            ele.parentNode.removeChild(ele);
+        },
+        remove_by_classname:function(classname){
+            var eles = document.getElementsByClassName(classname);
+            /*
+            * have to use while loop because eles is a live list and not an array
+            * live lists have to be removed backwards due to their constantly
+            * updating nature
+            */
+            while(eles[0]){
+                eles[0].parentNode.removeChild(eles[0]);
+            }
+            
         }
     }
 }
