@@ -64,3 +64,10 @@ This is just a simple utility object that I use in my work from time to time. I 
 | --- | --- | --- |
 | scripts | *string* url| unloads the script tag with the matching url  |
 | styles | *string* url | unloads the link tag with the matching url |
+
+####elements
+
+| method | arguments | description |
+| --- | --- | --- |
+| remove_by_id | *string* id| removes the matching element from it's parent node's childlist  |
+| remove_by_classname | *string* classname | removes all elements with the matching classname from their parents's childlist |
