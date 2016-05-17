@@ -76,4 +76,4 @@ This is just a simple utility object that I use in my work from time to time. I 
 
 | method | arguments | description |
 | --- | --- | --- |
-| fire | *Dom Element* obj *string* e| fire an element's event  |
+| fire | *Dom Element* obj, *string* e| fire an element's event  |
