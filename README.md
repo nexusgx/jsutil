@@ -71,3 +71,9 @@ This is just a simple utility object that I use in my work from time to time. I 
 | --- | --- | --- |
 | remove_by_id | *string* id| removes the matching element from it's parent node's childlist  |
 | remove_by_classname | *string* classname | removes all elements with the matching classname from their parents's childlist |
+
+####events
+
+| method | arguments | description |
+| --- | --- | --- |
+| fire | *Dom Element* obj *string* e| fire an element's event  |
