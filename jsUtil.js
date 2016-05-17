@@ -9,6 +9,23 @@
 
 if(!jsUtil)
 var jsUtil={
+    debug:false,
+    log_history:[],
+    log:function(item){
+        var output=(new Error).lineNumber,err={};
+        if(typeof output==='undefined'){
+            function getErrorObject(){
+                try { throw Error('') } catch(err) { return err; }
+            }
+            err = getErrorObject();
+            output = err.stack.split("\n")[4].slice(err.stack.split("\n")[4].indexOf("at ")+2, err.stack.split("\n")[4].length);
+        }
+        jsUtil.log_history.push({item:item,output:output});
+        if(jsUtil.debug){
+            console.log(item);
+            console.log(output);
+        }
+    },
     bool:{
         //toggle between two values; defaults to true and false;
         toggle: function(value,opt1,opt2){
@@ -320,8 +337,39 @@ var jsUtil={
                 eles[0].parentNode.removeChild(eles[0]);
             }
             
+        },
+        
+        //run code for each matching element found
+        each:function(selector,code_to_run){
+            var items=[];
+            if(typeof code_to_run==='function'){
+                //query the string unless it's already an array of elements
+
+                if(typeof selector==='string')
+                    items=document.querySelectorAll(selector);
+                else if(typeof selector==='object')
+                    items=selector;
+                    
+                for(var i=0;i<items.length;i++){
+                    code_to_run(items[i]);
+                }
+            }
         }
-    }
+    },
+	events:{
+		// trigger an event
+		fire:function (obj, e){
+			var evt = {};
+			if( document.createEvent ) {
+				evt = document.createEvent("HTMLEvents");
+				evt.initEvent(e, false, true);
+				obj.dispatchEvent( evt );
+			}
+			else if( document.createEventObject ) { //IE
+				obj.fireEvent( 'on' + e );
+			} 
+		} 
+	}
 }
 
 
