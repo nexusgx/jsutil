@@ -31,7 +31,7 @@ var jsUtil={
         toggle: function(value,opt1,opt2){
             
             //both opt1 and opt2 must be defined to use custom values
-            if(typeof opt1!='undefined' && typeof opt2!='undefined'){
+            if(typeof opt1!=='undefined' && typeof opt2!=='undefined'){
                 if(value===opt1) 
                     return opt2;
                 else 
@@ -49,7 +49,7 @@ var jsUtil={
     number:{
         // ensures a number is %, px, or em
         get_measurement:function(val){
-            if(typeof val=='number')
+            if(typeof val==='number')
                 return val.toString()+'%';
             else
                 return parseFloat(val)+(val.match(/(%|px|em)$/)||["%"])[0];
@@ -63,7 +63,7 @@ var jsUtil={
             var type='';
             
             //if it's already a number
-            if(typeof val=='number') return num;
+            if(typeof val==='number') return num;
             
             type=(val.match(/(%|px|em)$/)||["%"]);
             return parseFloat(num.replace(type,''));
@@ -164,7 +164,7 @@ var jsUtil={
 			for(var prop in obj1){
 				final_obj[prop] = obj1[prop];
 			}
-			for (var prop in obj2){
+			for (prop in obj2){
 				if(!final_obj.hasOwnProperty(prop)) //ignore property if it already exists
 					final_obj[prop] = obj2[prop];
 			}
@@ -190,7 +190,7 @@ var jsUtil={
 					return dest;
 				}
 
-				if(!obj || typeof obj != "object" || Object.prototype.toString.call(obj) === "[object Function]"){
+				if(!obj || typeof obj !== "object" || Object.prototype.toString.call(obj) === "[object Function]"){
 					// null, undefined, any non-object, or function
 					return obj;	// anything
 				}
@@ -237,7 +237,7 @@ var jsUtil={
         
         //is a value in an array
         in:function(needle,haystack){
-            for (key in haystack) {
+            for (var key in haystack) {
                 if (haystack[key] === needle) {
                     return true;
                 }
@@ -254,19 +254,20 @@ var jsUtil={
         
         //load a script and store it in the cache
         scripts:function(url,after){
-            if(!jsUtil.arrays.in(url,this.loaded)){
+            if(!jsUtil.arrays.in(url,jsUtil.load.loaded)){
                 var script= document.createElement("script");
                 script.type = "text/javascript";
                 document.getElementsByTagName('head')[0].appendChild(script);
-                if(typeof after=='function')
+                if(typeof after==='function')
                     script.onload=after;
                 script.src = url;
+                jsUtil.load.loaded.push(script);
             }
         },
         
         //load a stylesheet and store it in the cache
         styles:function(url,media,after){
-            if(!jsUtil.arrays.in(url,this.loaded)){
+            if(!jsUtil.arrays.in(url,jsUtil.load.loaded)){
                 var style= document.createElement("link");
                 style.rel = "stylesheet";
                 if(media)
@@ -274,9 +275,10 @@ var jsUtil={
                 else
                     style.media='screen';
                 document.getElementsByTagName('head')[0].appendChild(style);
-                if(typeof after=='function')
+                if(typeof after==='function')
                     script.onload=after;
                 style.href = url;
+                jsUtil.load.loaded.push(style);
             }
         }
     },
@@ -294,7 +296,7 @@ var jsUtil={
             }
             
             //remove url instance from the cache
-            for(var i=0;i<jsUtil.load.loaded.length;i++){
+            for(i=0;i<jsUtil.load.loaded.length;i++){
                 if(jsUtil.load.loaded[i].src===url){
                     jsUtil.load.loaded.splice(i,1);
                 }
@@ -313,7 +315,7 @@ var jsUtil={
             }
             
             //remove url instance from the cache
-            for(var i=0;i<jsUtil.load.loaded.length;i++){
+            for(i=0;i<jsUtil.load.loaded.length;i++){
                 if(jsUtil.load.loaded[i].src===url){
                     jsUtil.load.loaded.splice(i,1);
                 }
@@ -379,12 +381,12 @@ setTimeout(function(){
 	var loaded_urls_ar=document.getElementsByTagName('script');
 	for(var i=0;i<loaded_urls_ar.length;i++){ //load scripts
 		if(loaded_urls_ar[i].src!=='')
-			jsUtil.load.loaded.push(loaded_urls_ar[i].src);
+			jsUtil.load.loaded.push(loaded_urls_ar[i]);
 	}
 	loaded_urls_ar=document.getElementsByTagName('link');
-	for(var i=0;i<loaded_urls_ar.length;i++){ //load stylesheets
+	for(i=0;i<loaded_urls_ar.length;i++){ //load stylesheets
 		if(loaded_urls_ar[i].rel==='stylesheet' && loaded_urls_ar[i].href!==''){
-			jsUtil.load.loaded.push(loaded_urls_ar[i].href);
+			jsUtil.load.loaded.push(loaded_urls_ar[i]);
 		}
 	}
 },300);
