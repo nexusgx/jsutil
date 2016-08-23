@@ -15,15 +15,15 @@ var jsUtil={
         var output=(new Error).lineNumber,err={};
         if(typeof output==='undefined'){
             function getErrorObject(){
-                try { throw Error('') } catch(err) { return err; }
+                try { throw Error(''); } catch(err) { return err; }
             }
             err = getErrorObject();
             output = err.stack.split("\n")[4].slice(err.stack.split("\n")[4].indexOf("at ")+2, err.stack.split("\n")[4].length);
         }
         jsUtil.log_history.push({item:item,output:output});
         if(jsUtil.debug){
-            console.log(item);
-            console.log(output);
+            console.log(item,'::',output);
+            //console.log('-------------------------------------------------');
         }
     },
     bool:{
@@ -146,6 +146,11 @@ var jsUtil={
     
     // handle objects
     objects:{
+    	
+    	//return the number of properties and methods in an object
+    	length:function(obj){
+    		return Object.keys(obj).length;
+    	},
         
         // get an array of the object's properties
         get_properties:function(obj){
