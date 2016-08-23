@@ -37,6 +37,7 @@ This is just a simple utility object that I use in my work from time to time. I 
 
 | method | arguments | description |
 | --- | --- | --- |
+| length | | *object* obj | returns the number of properties and methods |
 | get_properties | *object* obj| runs through the object and finds all it's properties |
 | merge | *object* obj1, *object* obj2 | merges two objects into one new object. Properties of the second object will not be merged if the first object shares the same property name. The first object takes precedence.|
 | clone| *object* obj, *string* type | clone the source object. set type to deep for a deep copy. type defaults to 'shallow' |
