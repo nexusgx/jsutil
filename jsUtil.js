@@ -248,6 +248,22 @@ var jsUtil={
                 }
             }
             return false;
+        },
+        
+        //sort an array of objects by a common property in each object
+        sort_by_obj_prop:function(arr,prop,dir) {
+            if(typeof dir==='undefined')
+                dir='asc';
+                
+            arr.sort(function(a,b){
+                if ((a[prop] < b[prop] && dir==='asc') || (a[prop] > b[prop] && dir==='desc'))
+                    return -1;
+                if ((a[prop] > b[prop] && dir==='asc') || (a[prop] < b[prop] && dir==='desc'))
+                    return 1;
+                return 0;
+            });
+
+            return arr;
         }
     },
     
