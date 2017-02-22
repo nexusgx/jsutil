@@ -47,6 +47,7 @@ This is just a simple utility object that I use in my work from time to time. I 
 | method | arguments | description |
 | --- | --- | --- |
 | in | *mixed* needle, *array* haystack | determines if the value exists in the array |
+| sort_by_obj_prop | *array* arr, *string* prop, *string* dir | Sorts an array of objects by a common property in the objects. dir defaults to 'asc'. dir can also be set to 'desc' |
 
 ####load
 
