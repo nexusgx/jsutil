@@ -146,11 +146,11 @@ var jsUtil={
     
     // handle objects
     objects:{
-    	
-    	//return the number of properties and methods in an object
-    	length:function(obj){
-    		return Object.keys(obj).length;
-    	},
+        
+        //return the number of properties and methods in an object
+        length:function(obj){
+            return Object.keys(obj).length;
+        },
         
         // get an array of the object's properties
         get_properties:function(obj){
@@ -162,79 +162,79 @@ var jsUtil={
             }
             return keys;
         },
-		
-		//merge two objects into one new object
-		merge:function(obj1,obj2){
-			var final_obj = {};
-			for(var prop in obj1){
-				final_obj[prop] = obj1[prop];
-			}
-			for (prop in obj2){
-				if(!final_obj.hasOwnProperty(prop)) //ignore property if it already exists
-					final_obj[prop] = obj2[prop];
-			}
-			return final_obj;
-		},
-		
-		//copied almost directly from https://davidwalsh.name/javascript-clone
-		clone:function (obj,type){
-			if(typeof type ==='undefined')
-				type='shallow';
-			if(type==='deep'){
-				function mixin(dest, source, copyFunc) {
-					var name, s, i, empty = {};
-					for(name in source){
-						// the (!(name in empty) || empty[name] !== s) condition avoids copying properties in "source"
-						// inherited from Object.prototype.	 For example, if dest has a custom toString() method,
-						// don't overwrite it with the toString() method that source inherited from Object.prototype
-						s = source[name];
-						if(!(name in dest) || (dest[name] !== s && (!(name in empty) || empty[name] !== s))){
-							dest[name] = copyFunc ? copyFunc(s) : s;
-						}
-					}
-					return dest;
-				}
+        
+        //merge two objects into one new object
+        merge:function(obj1,obj2){
+            var final_obj = {};
+            for(var prop in obj1){
+                final_obj[prop] = obj1[prop];
+            }
+            for (prop in obj2){
+                if(!final_obj.hasOwnProperty(prop)) //ignore property if it already exists
+                    final_obj[prop] = obj2[prop];
+            }
+            return final_obj;
+        },
+        
+        //copied almost directly from https://davidwalsh.name/javascript-clone
+        clone:function (obj,type){
+            if(typeof type ==='undefined')
+                type='shallow';
+            if(type==='deep'){
+                function mixin(dest, source, copyFunc) {
+                    var name, s, i, empty = {};
+                    for(name in source){
+                        // the (!(name in empty) || empty[name] !== s) condition avoids copying properties in "source"
+                        // inherited from Object.prototype.     For example, if dest has a custom toString() method,
+                        // don't overwrite it with the toString() method that source inherited from Object.prototype
+                        s = source[name];
+                        if(!(name in dest) || (dest[name] !== s && (!(name in empty) || empty[name] !== s))){
+                            dest[name] = copyFunc ? copyFunc(s) : s;
+                        }
+                    }
+                    return dest;
+                }
 
-				if(!obj || typeof obj !== "object" || Object.prototype.toString.call(obj) === "[object Function]"){
-					// null, undefined, any non-object, or function
-					return obj;	// anything
-				}
-				if(obj.nodeType && "cloneNode" in obj){
-					// DOM Node
-					return obj.cloneNode(true); // Node
-				}
-				if(obj instanceof Date){
-					// Date
-					return new Date(obj.getTime());	// Date
-				}
-				if(obj instanceof RegExp){
-					// RegExp
-					return new RegExp(obj);   // RegExp
-				}
-				var r, i, l;
-				if(obj instanceof Array){
-					// array
-					r = [];
-					for(i = 0, l = obj.length; i < l; ++i){
-						if(i in obj){
-							r.push(jsUtil.objects.clone(obj[i]));
-						}
-					}
-					// we don't clone functions for performance reasons
-					//		}else if(d.isFunction(obj)){
-					//			// function
-					//			r = function(){ return obj.apply(this, arguments); };
-				}
-				else{
-					// generic objects
-					r = obj.constructor ? new obj.constructor() : {};
-				}
-				return mixin(r, obj, clone);
-			}
-			else if(type==='shallow'){
-				return JSON.parse(JSON.stringify(obj));
-			}
-		}
+                if(!obj || typeof obj !== "object" || Object.prototype.toString.call(obj) === "[object Function]"){
+                    // null, undefined, any non-object, or function
+                    return obj;    // anything
+                }
+                if(obj.nodeType && "cloneNode" in obj){
+                    // DOM Node
+                    return obj.cloneNode(true); // Node
+                }
+                if(obj instanceof Date){
+                    // Date
+                    return new Date(obj.getTime());    // Date
+                }
+                if(obj instanceof RegExp){
+                    // RegExp
+                    return new RegExp(obj);   // RegExp
+                }
+                var r, i, l;
+                if(obj instanceof Array){
+                    // array
+                    r = [];
+                    for(i = 0, l = obj.length; i < l; ++i){
+                        if(i in obj){
+                            r.push(jsUtil.objects.clone(obj[i]));
+                        }
+                    }
+                    // we don't clone functions for performance reasons
+                    //        }else if(d.isFunction(obj)){
+                    //            // function
+                    //            r = function(){ return obj.apply(this, arguments); };
+                }
+                else{
+                    // generic objects
+                    r = obj.constructor ? new obj.constructor() : {};
+                }
+                return mixin(r, obj, clone);
+            }
+            else if(type==='shallow'){
+                return JSON.parse(JSON.stringify(obj));
+            }
+        }
     },
     
     //handle arrays
@@ -379,35 +379,35 @@ var jsUtil={
             }
         }
     },
-	events:{
-		// trigger an event
-		fire:function (obj, e){
-			var evt = {};
-			if( document.createEvent ) {
-				evt = document.createEvent("HTMLEvents");
-				evt.initEvent(e, false, true);
-				obj.dispatchEvent( evt );
-			}
-			else if( document.createEventObject ) { //IE
-				obj.fireEvent( 'on' + e );
-			} 
-		} 
-	}
+    events:{
+        // trigger an event
+        fire:function (obj, e){
+            var evt = {};
+            if( document.createEvent ) {
+                evt = document.createEvent("HTMLEvents");
+                evt.initEvent(e, false, true);
+                obj.dispatchEvent( evt );
+            }
+            else if( document.createEventObject ) { //IE
+                obj.fireEvent( 'on' + e );
+            } 
+        } 
+    }
 }
 
 
 // load existing stylesheets and scripts into the jsUtil.load cache to allow unload to work
 // set on a timeout to allow for page loading
 setTimeout(function(){
-	var loaded_urls_ar=document.getElementsByTagName('script');
-	for(var i=0;i<loaded_urls_ar.length;i++){ //load scripts
-		if(loaded_urls_ar[i].src!=='')
-			jsUtil.load.loaded.push(loaded_urls_ar[i]);
-	}
-	loaded_urls_ar=document.getElementsByTagName('link');
-	for(i=0;i<loaded_urls_ar.length;i++){ //load stylesheets
-		if(loaded_urls_ar[i].rel==='stylesheet' && loaded_urls_ar[i].href!==''){
-			jsUtil.load.loaded.push(loaded_urls_ar[i]);
-		}
-	}
+    var loaded_urls_ar=document.getElementsByTagName('script');
+    for(var i=0;i<loaded_urls_ar.length;i++){ //load scripts
+        if(loaded_urls_ar[i].src!=='')
+            jsUtil.load.loaded.push(loaded_urls_ar[i]);
+    }
+    loaded_urls_ar=document.getElementsByTagName('link');
+    for(i=0;i<loaded_urls_ar.length;i++){ //load stylesheets
+        if(loaded_urls_ar[i].rel==='stylesheet' && loaded_urls_ar[i].href!==''){
+            jsUtil.load.loaded.push(loaded_urls_ar[i]);
+        }
+    }
 },300);
