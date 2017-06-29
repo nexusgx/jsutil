@@ -1,12 +1,12 @@
 # jsUtil
 
-This is just a simple utility object that I use in my work from time to time. I may add things from time to time, but it's never really a finished project. 
-
+This is just a simple utility object that I use in my work from time to time. I may add things from time to time, but it's never really a finished project.
 
 # Documentation
-##jsUtil object
 
-###number
+## jsUtil object
+
+### number
 | method | arguments | description |
 | --- | --- | --- |
 | get_measurement | *mixed* val| Forces val to have a measurement of either %, px, or em. Defaults to % if no matching measurement is present |
@@ -14,12 +14,12 @@ This is just a simple utility object that I use in my work from time to time. I 
 | get_number | *string* name | gets the number from a measurement of %, em, or px |
 | pad | *string* str, *string* pad, *string* pad_char | pads a string up to character number pad with pad_char. pad_char defaults to 0 |
 
-###bool
+### bool
 | method | arguments | description |
 | --- | --- | --- |
 | toggle | *mixed* val, *mixed* opt1, *mixed* opt2| toggles val between either true and false, or two custom values (opt1 and opt2). Both opt1 and opt2 must be defined in order to use the custom values |
 
-####store
+#### store
 
 | property |type| description |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ This is just a simple utility object that I use in my work from time to time. I 
 | exists | *string* name | detects if the property already exists within the Storage object |
 | purge |  | deletes all variables from the storage object that had been set by jsUtil |
 
-####objects
+#### objects
 
 | method | arguments | description |
 | --- | --- | --- |
@@ -42,14 +42,14 @@ This is just a simple utility object that I use in my work from time to time. I 
 | merge | *object* obj1, *object* obj2 | merges two objects into one new object. Properties of the second object will not be merged if the first object shares the same property name. The first object takes precedence.|
 | clone| *object* obj, *string* type | clone the source object. set type to deep for a deep copy. type defaults to 'shallow' |
 
-####arrays
+#### arrays
 
 | method | arguments | description |
 | --- | --- | --- |
 | in | *mixed* needle, *array* haystack | determines if the value exists in the array |
 | sort_by_obj_prop | *array* arr, *string* prop, *string* dir | Sorts an array of objects by a common property in the objects. dir defaults to 'asc'. dir can also be set to 'desc' |
 
-####load
+#### load
 
 | property |type| description |
 | --- | --- | --- |
@@ -60,21 +60,21 @@ This is just a simple utility object that I use in my work from time to time. I 
 | scripts | *string* url| loads the script tag in the header and points it to the url  |
 | styles | *string* url, *string* media | loads the link tag in the header and points it to the url. media defaults to stylesheet |
 
-####unload
+#### unload
 
 | method | arguments | description |
 | --- | --- | --- |
 | scripts | *string* url| unloads the script tag with the matching url  |
 | styles | *string* url | unloads the link tag with the matching url |
 
-####elements
+#### elements
 
 | method | arguments | description |
 | --- | --- | --- |
 | remove_by_id | *string* id| removes the matching element from it's parent node's childlist  |
 | remove_by_classname | *string* classname | removes all elements with the matching classname from their parents's childlist |
 
-####events
+#### events
 
 | method | arguments | description |
 | --- | --- | --- |
